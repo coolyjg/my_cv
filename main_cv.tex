@@ -24,12 +24,23 @@
     \ifboolexpr{ test { \ifdefstring{\namepartfamily}{#1} } 
                  and 
                  test { \ifdefstring{\namepartgiven}{#2} } }
+    \docsvlist{#1}%
+    \ifthenelse{\value{listcount}=1}{%
+      \ifthenelse{\boolean{bold}}{\mkbibbold{\namepartfamily\addcomma\addspace \namepartgiveni}}{\namepartfamily\addcomma\addspace \namepartgiveni}%
+    }{%
+      \ifnumless{\value{listcount}}{\value{liststop}}{%
+        \ifthenelse{\boolean{bold}}{\mkbibbold{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni}}{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni}%
+      }{%
+        \ifthenelse{\boolean{bold}}{\mkbibbold{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni\addcomma\isdot}}{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni\addcomma\isdot}%
+      }%
+    }%
+    \ifthenelse{\value{listcount}<\value{liststop}}{\addcomma\space}{}
     % 如果匹配，则加粗显示作者姓名
-    {\mkbibbold{\namepartfamily\addcomma\addspace \namepartgiven}}
+    % {\mkbibbold{\namepartfamily\addcomma\addspace \namepartgiven}}
     % 如果不匹配，则正常显示作者姓名
-    {\namepartfamily\addcomma\addspace \namepartgiven}%
-    % 输出逗号和空格
-    \ifmorenames{\addcomma\addspace}{\addcomma\addspace}%
+    % {\namepartfamily\addcomma\addspace \namepartgiven}%
+    % % 输出逗号和空格
+    % \ifmorenames{\addcomma\addspace}{\addcomma\addspace}%
   }%
 }
 \makeauthorsbold{Chen}{Kang}
