@@ -31,16 +31,17 @@
       }{}%
     }%
     \docsvlist{#1}%
-    \ifthenelse{\value{listcount}=1}
-    {%
-      {\expandafter\ifthenelse{\boolean{bold}}{\mkbibbold{\namepartfamily\addcomma\addspace \namepartgiveni}}{\namepartfamily\addcomma\addspace \namepartgiveni}}%
-    }{\ifnumless{\value{listcount}}{\value{liststop}}
-      {\expandafter\ifthenelse{\boolean{bold}}{\mkbibbold{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni}}{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni}}%
-      {\expandafter\ifthenelse{\boolean{bold}}{\mkbibbold{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni\addcomma\isdot}}{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni\addcomma\isdot}}%
-      }
-    \ifthenelse{\value{listcount}<\value{liststop}}
-    {\addcomma\space}{}
-  }
+    \ifthenelse{\value{listcount}=1}{%
+      \ifthenelse{\boolean{bold}}{\mkbibbold{\namepartfamily\addcomma\addspace \namepartgiveni}}{\namepartfamily\addcomma\addspace \namepartgiveni}%
+    }{%
+      \ifnumless{\value{listcount}}{\value{liststop}}{%
+        \ifthenelse{\boolean{bold}}{\mkbibbold{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni}}{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni}%
+      }{%
+        \ifthenelse{\boolean{bold}}{\mkbibbold{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni\addcomma\isdot}}{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni\addcomma\isdot}%
+      }%
+    }%
+    \ifthenelse{\value{listcount}<\value{liststop}}{\addcomma\space}{}
+  }%
 }
 \makeauthorsbold{Chen, Kang}
 
