@@ -24,9 +24,8 @@
     \renewcommand{\do}[1]{%
       \StrBefore{##1}{,}[\authorlastname]%
       \StrBehind{##1}{, }[\authorgivenname]%
-      \StrGobbleRight{\authorgivenname}{1}[\tempauthorgivenname]% 
       \expandafter\ifstrequal\expandafter{\authorlastname}{\namepartfamily}{%
-        \expandafter\ifstrequal\expandafter{\tempauthorgivenname}{\namepartgiveni}{%
+        \expandafter\ifstrequal\expandafter{\authorgivenname}{\namepartgiveni}{%
           \setboolean{bold}{true}%
         }{}%
       }{}%
