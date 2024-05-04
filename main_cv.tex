@@ -21,7 +21,7 @@
 \newcommand{\makeauthorsbold}[1]{%
   \DeclareNameFormat{author}{%
   \setboolean{bold}{false}%
-    \renewcommand{\do}[1]{\expandafter\ifstrequal\expandafter{\namepartfamily}{####1}{\setboolean{bold}{true}}{}}%
+    \renewcommand{\do}[1]{\expandafter\ifstrequal{author}{#1}{true}{false}\expandafter{\namepartfamily}{####1}{\setboolean{bold}{true}}{}}%
     \docsvlist{#1}%
     \ifthenelse{\value{listcount}=1}
     {%
