@@ -18,7 +18,7 @@
 \usepackage{xstring}
 \usepackage{etoolbox}
 \newboolean{bold}
-\newcommand{\makeauthorsbold}[1]{%
+\newcommand{\makeauthorsbold}[2]{%
   \DeclareNameFormat{author}{%
     % 检查当前作者是否在给定的作者列表中
     \ifboolexpr{ test { \ifdefstring{\namepartfamily}{#1} } 
@@ -32,9 +32,7 @@
     \ifmorenames{\addcomma\addspace}{\addcomma\addspace}%
   }%
 }
-
 \makeauthorsbold{Chen}{Kang}
-
 % \newcommand{\makeauthorsbold}[1]{%
 %   \DeclareNameFormat{author}{%
 %   \setboolean{bold}{false}%
