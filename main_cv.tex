@@ -21,7 +21,16 @@
 \newcommand{\makeauthorsbold}[1]{%
   \DeclareNameFormat{author}{%
   \setboolean{bold}{false}%
-    \renewcommand{\do}[1]{\expandafter\ifstrequal{author}{#1}{true}{false}\expandafter{\namepartfamily}{####1}{\setboolean{bold}{true}}{}}%
+    \renewcommand{\do}[1]{%
+      \StrBefore{##1}{,}[\authorlastname]%
+      \StrBehind{##1}{, }[\authorgivenname]%
+      \StrGobbleRight{\authorgivenname}{1}[\tempauthorgivenname]% 
+      \expandafter\ifstrequal\expandafter{\authorlastname}{\namepartfamily}{%
+        \expandafter\ifstrequal\expandafter{\tempauthorgivenname}{\namepartgiveni}{%
+          \setboolean{bold}{true}%
+        }{}%
+      }{}%
+    }%
     \docsvlist{#1}%
     \ifthenelse{\value{listcount}=1}
     {%
