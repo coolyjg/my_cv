@@ -15,34 +15,24 @@
 \addbibresource[]{biblio.bib}
 
 % bold the name of specific author
+% forcibly set bold to false
 \usepackage{xstring}
 \usepackage{etoolbox}
 \newboolean{bold}
 \newcommand{\makeauthorsbold}[1]{%
   \DeclareNameFormat{author}{%
   \setboolean{bold}{false}%
-    \renewcommand{\do}[1]{%
-      \IfSubStr{##1}{\namepartfamily}
-      {%
-        \IfSubStr{##1}{\namepartgiveni}
-        {%
-          % 如果匹配成功，则将标志变量设置为真
-          \setboolean{bold}{true}%
-        }{}%
-      }{}%
-    }%
     \docsvlist{#1}%
-    \ifthenelse{\value{listcount}=1}{%
-      \ifthenelse{\boolean{bold}}{\mkbibbold{\namepartfamily\addcomma\addspace \namepartgiveni}}{\namepartfamily\addcomma\addspace \namepartgiveni}%
-    }{%
-      \ifnumless{\value{listcount}}{\value{liststop}}{%
-        \ifthenelse{\boolean{bold}}{\mkbibbold{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni}}{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni}%
-      }{%
-        \ifthenelse{\boolean{bold}}{\mkbibbold{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni\addcomma\isdot}}{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni\addcomma\isdot}%
-      }%
-    }%
-    \ifthenelse{\value{listcount}<\value{liststop}}{\addcomma\space}{}
-  }%
+    \ifthenelse{\value{listcount}=1}
+    {%
+      {\expandafter\ifthenelse{\boolean{bold}}{\mkbibbold{\namepartfamily\addcomma\addspace \namepartgiveni}}{\namepartfamily\addcomma\addspace \namepartgiveni}}%
+    }{\ifnumless{\value{listcount}}{\value{liststop}}
+      {\expandafter\ifthenelse{\boolean{bold}}{\mkbibbold{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni}}{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni}}%
+      {\expandafter\ifthenelse{\boolean{bold}}{\mkbibbold{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni\addcomma\isdot}}{\addcomma\addspace \namepartfamily\addcomma\addspace \namepartgiveni\addcomma\isdot}}%
+      }
+    \ifthenelse{\value{listcount}<\value{liststop}}
+    {\addcomma\space}{}
+  }
 }
 \makeauthorsbold{Chen, Kang}
 
@@ -182,6 +172,7 @@
     \subsection*{Conference Proceedings}
     \begin{tablist}
         \item[2024] \tab{}\fullcite{ren2024scaling}
+        \item[2024] \tab{}\fullcite{ma2024noctua}
         \item[2023] \tab{}\fullcite{ji2023falcon}
         \item[2023] \tab{}\fullcite{zhang2023partial}
         \item[2023] \tab{}\fullcite{shan2023explore}
